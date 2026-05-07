@@ -5,6 +5,21 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-05-07
+
+### Added
+
+- `DominantColor` — one-pass dominant-colour helpers backed by Core
+  Image's `CIAreaAverage` filter (single GPU-side reduce over the
+  input pixels, so the cost is independent of resolution beyond the
+  initial upload). Useful for UI surfaces that want a representative
+  tint per image without paying a per-frame CPU walk: pinboard
+  thumbnails, mini-map dots, swatch palettes, …
+  - `averageColor(of:)` — `NSColor` overloads for `NSImage` and `CGImage`.
+  - `averageHex(of:)` — `#RRGGBB` storage form for Core Data /
+    Codable consumers.
+  - `color(fromHex:)` — round-trip parser tolerant of a missing `#`.
+
 ## [0.1.0] - 2026-05-06 — Initial release
 
 Extracted from [Voilà](https://github.com/smart-byte/voila) as a

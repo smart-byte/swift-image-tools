@@ -5,7 +5,7 @@
 [![macOS](https://img.shields.io/badge/macOS-10.15%2B-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-5.10%2B-orange?logo=swift&logoColor=white)](https://swift.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-0.1.0-lightgrey)](https://github.com/smart-byte/swift-image-tools/releases)
+[![Version](https://img.shields.io/badge/Version-0.2.0-lightgrey)](https://github.com/smart-byte/swift-image-tools/releases)
 
 </div>
 

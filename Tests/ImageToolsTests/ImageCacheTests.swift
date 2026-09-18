@@ -81,4 +81,22 @@ struct ImageCacheTests {
         // 64 is its own bucket — should not be populated.
         #expect(cache.cachedImage(for: url, maxDimension: 64) == nil)
     }
+
+    // MARK: - Display-ready bitmaps
+
+    /// Core Animation uploads 8-bit sRGB premultiplied bitmaps as they are;
+    /// anything else is re-rendered on the main thread at every attach.
+    @Test func generatedThumbnailIsAnSRGBPremultipliedBitmap() async throws {
+        let url = try writeTestPNG()
+        defer { try? FileManager.default.removeItem(at: url) }
+
+        let image = try #require(await ImageCache().image(for: url, maxDimension: 64))
+        var rect = CGRect(origin: .zero, size: image.size)
+        let cgImage = try #require(image.cgImage(forProposedRect: &rect, context: nil, hints: nil))
+
+        #expect(cgImage.bitsPerComponent == 8)
+        #expect(cgImage.colorSpace?.name == CGColorSpace.sRGB)
+        #expect(cgImage.alphaInfo == .premultipliedFirst)
+        #expect(ImageCache.cost(of: image) == cgImage.width * cgImage.height * 4)
+    }
 }
